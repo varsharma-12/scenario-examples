@@ -6,21 +6,22 @@ The Strimzi operator manages Kafka clusters using Kubernetes Custom Resource Def
 
 First, create a dedicated namespace for Kafka:
 `````bash
-kubectl get pods -n kafka
+kubectl create namespace kafka
 ````{{exec}}
-````
+`````
 
 Verify the namespace:
-````````````````````````````````````````````````````````````````````````````````````````````````````bash
+`````bash
 kubectl get namespaces
-```````````````````````````````````````````````````````````````````````````````````````````````````{{exec}}
-
+`````{{exec}}
+`````
 ## Install Strimzi Operator
 
 Download and apply the Strimzi installation files:
-``````````````````````````````````````````````````````````````````````````````````````````````````bash
+`````bash
 kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
 `````````````````````````````````````````````````````````````````````````````````````````````````{{exec}}
+`````
 
 This command installs:
 - Custom Resource Definitions (CRDs) for Kafka, KafkaTopic, KafkaUser, etc.
@@ -30,10 +31,10 @@ This command installs:
 ## Verify Installation
 
 Watch the operator pod start up:
-````````````````````````````````````````````````````````````````````````````````````````````````bash
+`````bash
 kubectl get pods -n kafka -w
 ```````````````````````````````````````````````````````````````````````````````````````````````{{exec}}
-
+`````
 Press `Ctrl+C` to stop watching once the pod shows `Running` status.
 
 Check the operator logs:
