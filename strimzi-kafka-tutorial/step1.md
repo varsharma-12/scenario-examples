@@ -17,9 +17,9 @@ kubectl get namespaces
 ## Install Strimzi Operator
 
 Download and apply the Strimzi installation files:
-````````````bash
+````bash
 kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
-```````````{{exec}}
+````{{exec}}
 
 This command installs:
 - Custom Resource Definitions (CRDs) for Kafka, KafkaTopic, KafkaUser, etc.
