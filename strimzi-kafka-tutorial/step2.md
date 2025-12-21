@@ -10,22 +10,44 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that eliminates the depende
 - Improved scalability
 - ZooKeeper will be removed in Kafka 4.0
 
-## Create Kafka Cluster
+## Create Kraft Cluster
 
-Create a file with the KRaft-based Kafka cluster definition:
+Create a file with the KRaft definition:
+````bash
+cat <<EOF > kraft-cluster.yaml
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaNodePool
+metadata:
+  name: dual-role
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  replicas: 3
+  roles:
+    - controller
+    - broker
+  storage:
+    type: jbod
+    volumes:
+      - id: 0
+        type: persistent-claim
+        size: 100Gi
+        deleteClaim: false
+        kraftMetadata: shared
+EOF
+````{{exec}}
+
+## Create a file with the KRaft definition:
 ````bash
 cat <<EOF > kafka-cluster.yaml
-apiVersion: kafka.strimzi.io/v1beta2
+apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
   name: my-cluster
-  namespace: kafka
-  annotations:
-    strimzi.io/kraft: enabled
 spec:
   kafka:
-    version: 3.6.0
-    replicas: 3
+    version: 4.1.1
+    metadataVersion: 4.1-IV1
     listeners:
       - name: plain
         port: 9092
@@ -38,11 +60,9 @@ spec:
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
-      transaction.state.log.min.isr: 2
+      transaction.state.log.min.isr: 3
       default.replication.factor: 3
-      min.insync.replicas: 2
-    storage:
-      type: ephemeral
+      min.insync.replicas: 3
   entityOperator:
     topicOperator: {}
     userOperator: {}
@@ -50,6 +70,10 @@ EOF
 ````{{exec}}
 
 Apply the configuration:
+````bash
+kubectl apply -f kraft-cluster.yaml
+````{{exec}}
+
 ````bash
 kubectl apply -f kafka-cluster.yaml
 ````{{exec}}
