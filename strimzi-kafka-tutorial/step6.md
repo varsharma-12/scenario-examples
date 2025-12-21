@@ -161,9 +161,6 @@ kubectl exec -it $POD -n kafka -- \
 
 ---
 
-### **finish.md**
-```markdown
-# Congratulations! 🎉
 
 You've successfully completed the Strimzi Kafka on Kubernetes tutorial!
 
