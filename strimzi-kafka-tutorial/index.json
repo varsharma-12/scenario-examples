@@ -1,0 +1,50 @@
+{
+  "title": "Apache Kafka on Kubernetes with Strimzi",
+  "description": "Learn how to deploy and manage Apache Kafka on Kubernetes using the Strimzi operator",
+  "difficulty": "Intermediate",
+  "time": "30-40 minutes",
+  "details": {
+    "steps": [
+      {
+        "title": "Install Strimzi Operator",
+        "text": "step1.md"
+      },
+      {
+        "title": "Deploy Kafka Cluster",
+        "text": "step2.md"
+      },
+      {
+        "title": "Create Kafka Topics",
+        "text": "step3.md"
+      },
+      {
+        "title": "Produce and Consume Messages",
+        "text": "step4.md"
+      },
+      {
+        "title": "Scale and Monitor",
+        "text": "step5.md"
+      },
+      {
+        "title": "Security and Authentication",
+        "text": "step6.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {"file": "kafka-persistent.yaml", "target": "/root/"},
+        {"file": "kafka-topic.yaml", "target": "/root/"},
+        {"file": "kafka-user.yaml", "target": "/root/"}
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}
