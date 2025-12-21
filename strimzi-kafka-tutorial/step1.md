@@ -5,9 +5,10 @@ The Strimzi operator manages Kafka clusters using Kubernetes Custom Resource Def
 ## Create Kafka Namespace
 
 First, create a dedicated namespace for Kafka:
-``````````````````````````````````````````````````````````````````````````````````````````````````````bash
-kubectl create namespace kafka
-`````````````````````````````````````````````````````````````````````````````````````````````````````{{exec}}
+`````bash
+kubectl get pods -n kafka
+````{{exec}}
+````
 
 Verify the namespace:
 ````````````````````````````````````````````````````````````````````````````````````````````````````bash
