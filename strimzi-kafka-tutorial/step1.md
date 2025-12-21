@@ -7,7 +7,7 @@ The Strimzi operator manages Kafka clusters using Kubernetes Custom Resource Def
 First, create a dedicated namespace for Kafka:
 `````bash
 kubectl create namespace kafka
-````{{exec}}
+`````{{exec}}
 `````
 
 Verify the namespace:
