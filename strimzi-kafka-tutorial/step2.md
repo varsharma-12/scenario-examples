@@ -10,9 +10,8 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that eliminates the depende
 - Improved scalability
 - ZooKeeper will be removed in Kafka 4.0
 
-## Create Kraft Cluster
+## Create kafka-with-dual-role Cluster
 
-Create a file with the KRaft definition:
 ````bash
 cat <<EOF > kraft-cluster.yaml
 apiVersion: kafka.strimzi.io/v1
@@ -34,12 +33,7 @@ spec:
         size: 100Gi
         deleteClaim: false
         kraftMetadata: shared
-EOF
-````{{exec}}
-
-## Create a file with the KRaft definition:
-````bash
-cat <<EOF > kafka-cluster.yaml
+----
 apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
@@ -60,9 +54,9 @@ spec:
     config:
       offsets.topic.replication.factor: 3
       transaction.state.log.replication.factor: 3
-      transaction.state.log.min.isr: 3
+      transaction.state.log.min.isr: 2
       default.replication.factor: 3
-      min.insync.replicas: 3
+      min.insync.replicas: 2
   entityOperator:
     topicOperator: {}
     userOperator: {}
@@ -71,12 +65,9 @@ EOF
 
 Apply the configuration:
 ````bash
-kubectl apply -f kraft-cluster.yaml
+kubectl apply -f kafka-with-dual-role-nodes.yaml
 ````{{exec}}
 
-````bash
-kubectl apply -f kafka-cluster.yaml
-````{{exec}}
 
 ## Understanding the Configuration
 
