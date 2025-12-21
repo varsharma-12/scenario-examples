@@ -11,3 +11,19 @@ You've successfully completed the Strimzi Kafka on Kubernetes tutorial!
 ✅ Scaled Kafka brokers dynamically
 ✅ Configured security with TLS and SASL authentication
 ✅ Set up ACLs for authorization
+
+
+## Clean Up (Optional)
+
+If you want to clean up the resources:
+
+\`\`\`bash
+kubectl delete kafka my-cluster -n kafka
+kubectl delete kafkatopic --all -n kafka
+kubectl delete kafkauser --all -n kafka
+kubectl delete namespace kafka
+\`\`\`
+
+Thank you for completing this tutorial! Keep exploring Kafka on Kubernetes! 🚀
+```
+
