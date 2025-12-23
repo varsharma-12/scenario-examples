@@ -173,8 +173,6 @@ kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-topics.sh --bootstrap-
 ---
 
 Some KRaft verification steps:
-`````````markdown
-## Advanced KRaft Verification
 
 Check the metadata log directory:
 ````bash
@@ -190,4 +188,3 @@ Check cluster metadata version:
 ````bash
 kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-features.sh --bootstrap-server localhost:9092 describe
 ```{{exec}}
-```
