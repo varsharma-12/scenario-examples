@@ -168,16 +168,13 @@ Test creating a topic using the Kafka CLI:
 kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-topics.sh --bootstrap-server my-cluster-kafka-bootstrap:9092 --list
 ````{{exec}}
 
-## Compare: KRaft vs ZooKeeper
 
 ✅ **Checkpoint**: Your 3-node KRaft-based Kafka cluster is now running!
-`````````
 
----
-
-Some KRaft verification steps:
+# Some KRaft verification steps:
 
 Check the metadata log directory:
+
 ````bash
 kubectl exec -it my-cluster-kafka-0 -n kafka -- ls -la /var/lib/kafka/data/kraft-combined-logs
 ````{{exec}}
