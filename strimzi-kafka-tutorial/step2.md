@@ -170,21 +170,3 @@ kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-topics.sh --bootstrap-
 
 
 ✅ **Checkpoint**: Your 3-node KRaft-based Kafka cluster is now running!
-
-# Some KRaft verification steps:
-
-Check the metadata log directory:
-
-````bash
-kubectl exec -it my-cluster-kafka-0 -n kafka -- ls -la /var/lib/kafka/data/kraft-combined-logs
-````{{exec}}
-
-View KRaft metadata:
-````bash
-kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-metadata-shell.sh --snapshot /var/lib/kafka/data/__cluster_metadata-0/00000000000000000000.log
-````{{exec}}
-
-Check cluster metadata version:
-````bash
-kubectl exec -it my-cluster-kafka-0 -n kafka -- bin/kafka-features.sh --bootstrap-server localhost:9092 describe
-```{{exec}}
