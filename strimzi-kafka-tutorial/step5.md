@@ -1,5 +1,5 @@
 ### **step5.md** (Scale and Monitor)
-`````````````````````````````````````````````````markdown
+
 # Step 5: Scale and Monitor Kafka
 
 Learn how to scale your Kafka cluster and monitor its health.
@@ -7,45 +7,45 @@ Learn how to scale your Kafka cluster and monitor its health.
 ## Scale Kafka Brokers
 
 Currently, we have 3 brokers. Let's scale to 5:
-````````````````````````````````````````````````bash
+````bash
 kubectl patch kafka my-cluster -n kafka --type merge \
   -p '{"spec":{"kafka":{"replicas":5}}}'
-```````````````````````````````````````````````{{exec}}
+````{{exec}}
 
 Watch the new pods being created:
-``````````````````````````````````````````````bash
+````bash
 kubectl get pods -n kafka -w
-`````````````````````````````````````````````{{exec}}
+````{{exec}}
 
 Press `Ctrl+C` once you see 5 Kafka pods running.
 
 ## Verify Scaling
 
 Check broker IDs:
-````````````````````````````````````````````bash
+````bash
 kubectl exec -it my-cluster-kafka-0 -n kafka -- \
   bin/kafka-broker-api-versions.sh \
   --bootstrap-server my-cluster-kafka-bootstrap:9092
-```````````````````````````````````````````{{exec}}
+````{{exec}}
 
 You should see 5 broker IDs (0-4).
 
 ## Monitor Cluster Health
 
 Check pod resource usage:
-``````````````````````````````````````````bash
+````bash
 kubectl top pods -n kafka
-`````````````````````````````````````````{{exec}}
+````{{exec}}
 
 View broker logs:
-````````````````````````````````````````bash
+````bash
 kubectl logs my-cluster-kafka-0 -n kafka --tail=50
-```````````````````````````````````````{{exec}}
+````{{exec}}
 
 ## Partition Reassignment
 
 Create a topic to demonstrate rebalancing:
-``````````````````````````````````````bash
+````bash
 cat <<EOF | kubectl apply -f -
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
@@ -58,50 +58,50 @@ spec:
   partitions: 10
   replicas: 2
 EOF
-`````````````````````````````````````{{exec}}
+````{{exec}}
 
 Check partition distribution:
-````````````````````````````````````bash
+````bash
 kubectl exec -it my-cluster-kafka-0 -n kafka -- \
   bin/kafka-topics.sh \
   --bootstrap-server my-cluster-kafka-bootstrap:9092 \
   --describe \
   --topic test-rebalance
-```````````````````````````````````{{exec}}
+````{{exec}}
 
 Notice partitions might not be evenly distributed. In production, you'd use Cruise Control for auto-rebalancing.
 
 ## Rolling Update
 
 Trigger a rolling restart (useful after configuration changes):
-``````````````````````````````````bash
+````bash
 kubectl annotate kafka my-cluster -n kafka \
   strimzi.io/manual-rolling-update=true
-`````````````````````````````````{{exec}}
+````{{exec}}
 
 Watch the rolling restart:
-````````````````````````````````bash
+````bash
 kubectl get pods -n kafka -w
-```````````````````````````````{{exec}}
+````{{exec}}
 
 Pods will restart one at a time. Press `Ctrl+C` when complete.
 
 ## Check Cluster Status
 
 Get Kafka resource status:
-``````````````````````````````bash
+````bash
 kubectl get kafka my-cluster -n kafka -o jsonpath='{.status.conditions[*].type}' | tr ' ' '\n'
-`````````````````````````````{{exec}}
+````{{exec}}
 
 Should show: `Ready`
 
 ## Scale Down
 
 Scale back to 3 brokers:
-````````````````````````````bash
+````bash
 kubectl patch kafka my-cluster -n kafka --type merge \
   -p '{"spec":{"kafka":{"replicas":3}}}'
-```````````````````````````{{exec}}
+````{{exec}}
 
 **Warning**: In production, ensure partitions are reassigned before scaling down!
 
