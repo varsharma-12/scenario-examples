@@ -41,7 +41,7 @@ EOF
 Apply the configuration:
 
 ````bash
-kubectl apply -f KafkaNodePool.yaml.yaml
+kubectl apply -f KafkaNodePool.yaml
 ````{{exec}}
 
 Create a new Kafka custom resource .
@@ -52,6 +52,9 @@ apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
   name: my-cluster
+  annotations:
+    strimzi.io/node-pools: enabled  
+    strimzi.io/kraft: enabled
 spec:
   kafka:
     version: 4.1.1
