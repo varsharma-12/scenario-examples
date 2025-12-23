@@ -41,7 +41,7 @@ EOF
 Apply the configuration:
 
 ````bash
-kubectl apply -f KafkaNodePool.yaml
+kubectl apply -f KafkaNodePool.yaml -n kafka
 ````{{exec}}
 
 Create a new Kafka custom resource .
@@ -82,7 +82,7 @@ EOF
 
 Apply the configuration:
 ````bash
-kubectl apply -f kafka.yaml
+kubectl apply -f kafka.yaml -n kafka
 ````{{exec}}
 
 
