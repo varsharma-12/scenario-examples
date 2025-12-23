@@ -19,7 +19,7 @@ cat <<EOF > KafkaNodePool.yaml
 apiVersion: kafka.strimzi.io/v1
 kind: KafkaNodePool
 metadata:
-  name: dual-role
+  name: kafka
   labels:
     strimzi.io/cluster: my-cluster
 spec:
