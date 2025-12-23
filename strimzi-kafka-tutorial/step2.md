@@ -1,6 +1,6 @@
 # Step 2: Deploy Kafka Cluster (KRaft Mode)
 
-Now let's deploy a Kafka cluster with 3 brokers using KRaft mode (no ZooKeeper needed!).
+Now let's deploy a Kafka cluster with 3 brokers using KRaft mode .
 
 ## What is KRaft?
 
@@ -12,8 +12,10 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that eliminates the depende
 
 ## Create kafka-with-dual-role Cluster
 
+Create a new Kafka custom resource .
+
 ````bash
-cat <<EOF > kraft-cluster.yaml
+cat <<EOF > KafkaNodePool.yaml
 apiVersion: kafka.strimzi.io/v1
 kind: KafkaNodePool
 metadata:
@@ -33,7 +35,19 @@ spec:
         size: 100Gi
         deleteClaim: false
         kraftMetadata: shared
-----
+EOF
+````{{exec}}
+
+Apply the configuration:
+
+````bash
+kubectl apply -f KafkaNodePool.yaml.yaml
+````{{exec}}
+
+Create a new Kafka custom resource .
+
+````bash
+cat <<EOF > kafka.yaml
 apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
@@ -65,7 +79,7 @@ EOF
 
 Apply the configuration:
 ````bash
-kubectl apply -f kafka-with-dual-role-nodes.yaml
+kubectl apply -f kafka.yaml
 ````{{exec}}
 
 
