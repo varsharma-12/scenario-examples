@@ -3,7 +3,7 @@
 Welcome to this hands-on tutorial! You'll learn how to:
 
 - 🚀 Install the Strimzi Operator on Kubernetes
-- ☕ Deploy a production-ready Kafka cluster
+- ☕ Deploy a 3 node kraft based kafka cluster
 - 📝 Create and manage Kafka topics declaratively
 - 🔐 Configure authentication and security
 - 📊 Monitor and scale your Kafka cluster
