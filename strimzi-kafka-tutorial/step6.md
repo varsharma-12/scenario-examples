@@ -3,7 +3,7 @@
 Configure TLS encryption and SASL authentication.
 
 ## Create Kafka User with SCRAM-SHA-512
-``````````````````````````bash
+````bash
 cat < kafka-user.yaml
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
@@ -33,24 +33,24 @@ spec:
         operations:
           - Read
 EOF
-`````````````````````````{{exec}}
+````{{exec}}
 
 Apply the user:
-````````````````````````bash
+````bash
 kubectl apply -f kafka-user.yaml
-```````````````````````{{exec}}
+````{{exec}}
 
 ## Retrieve User Credentials
 
 Get the generated password:
-``````````````````````bash
+````bash
 kubectl get secret my-user -n kafka -o jsonpath='{.data.password}' | base64 -d
-`````````````````````{{exec}}
+````{{exec}}
 
 Save this password for later use.
 
 ## Update Kafka to Enable SASL
-````````````````````bash
+````bash
 kubectl patch kafka my-cluster -n kafka --type merge -p '
 {
   "spec": {
@@ -81,19 +81,19 @@ kubectl patch kafka my-cluster -n kafka --type merge -p '
     }
   }
 }'
-```````````````````{{exec}}
+````{{exec}}
 
 Wait for the rolling update:
-``````````````````bash
+````bash
 kubectl get pods -n kafka -w
-`````````````````{{exec}}
+````{{exec}}
 
 Press `Ctrl+C` when done.
 
 ## Test Authenticated Connection
 
 Create a properties file for the producer:
-````````````````bash
+````bash
 PASSWORD=$(kubectl get secret my-user -n kafka -o jsonpath='{.data.password}' | base64 -d)
 
 cat < /tmp/client.properties
@@ -101,49 +101,49 @@ security.protocol=SASL_PLAINTEXT
 sasl.mechanism=SCRAM-SHA-512
 sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule required username="my-user" password="$PASSWORD";
 EOF
-```````````````{{exec}}
+````{{exec}}
 
 Copy to a pod:
-``````````````bash
+````bash
 POD=$(kubectl get pod -n kafka -l app.kubernetes.io/name=kafka -o jsonpath='{.items[0].metadata.name}')
 kubectl cp /tmp/client.properties kafka/$POD:/tmp/client.properties
-`````````````{{exec}}
+````{{exec}}
 
 Test producer with authentication:
-````````````bash
+````bash
 kubectl exec -it $POD -n kafka -- \
   bin/kafka-console-producer.sh \
   --bootstrap-server my-cluster-kafka-bootstrap:9094 \
   --topic demo-topic \
   --producer.config /tmp/client.properties
-```````````{{exec}}
+````{{exec}}
 
 Type a message and hit Enter, then Ctrl+C to exit.
 
 ## Test TLS Connection
 
 Extract cluster CA certificate:
-``````````bash
+````bash
 kubectl get secret my-cluster-cluster-ca-cert -n kafka \
   -o jsonpath='{.data.ca\.crt}' | base64 -d > /tmp/ca.crt
-`````````{{exec}}
+````{{exec}}
 
 Create TLS properties:
-````````bash
+````bash
 cat < /tmp/tls-client.properties
 security.protocol=SSL
 ssl.truststore.location=/tmp/truststore.jks
 ssl.truststore.password=changeit
 EOF
-```````{{exec}}
+````{{exec}}
 
 Create truststore:
-``````bash
+````bash
 keytool -import -trustcacerts -alias root \
   -file /tmp/ca.crt \
   -keystore /tmp/truststore.jks \
   -storepass changeit -noprompt
-`````{{exec}}
+````{{exec}}
 
 ## View ACLs
 
@@ -154,7 +154,7 @@ kubectl exec -it $POD -n kafka -- \
   --bootstrap-server my-cluster-kafka-bootstrap:9092 \
   --list \
   --topic demo-topic
-```{{exec}}
+````{{exec}}
 
 ✅ **Checkpoint**: Security configured with authentication and authorization!
 ```
