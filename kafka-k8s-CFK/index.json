@@ -1,0 +1,55 @@
+{
+  "title": "Deploy Kafka with KRaft on Kubernetes using Confluent Operator",
+  "description": "Learn how to deploy Apache Kafka using KRaft mode (without ZooKeeper) on Kubernetes with Confluent for Kubernetes Operator",
+  "difficulty": "Intermediate",
+  "time": "25-35 minutes",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "assets/setup.sh"
+    },
+    "steps": [
+      {
+        "title": "Verify Kubernetes Cluster",
+        "text": "step1/text.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Install Confluent Operator",
+        "text": "step2/text.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Deploy Kafka with KRaft",
+        "text": "step3/text.md",
+        "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Verify KRaft Cluster",
+        "text": "step4/text.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Create and Manage Topics",
+        "text": "step5/text.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Produce and Consume Messages",
+        "text": "step6/text.md",
+        "verify": "step6/verify.sh"
+      },
+      {
+        "title": "Scale KRaft Cluster",
+        "text": "step7/text.md",
+        "verify": "step7/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}
