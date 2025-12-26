@@ -6,43 +6,35 @@
   "details": {
     "intro": {
       "text": "intro.md",
-      "background": "assets/setup.sh"
     },
     "steps": [
       {
         "title": "Verify Kubernetes Cluster",
-        "text": "step1/text.md",
-        "verify": "step1/verify.sh"
+        "text": "step1.md"
       },
       {
         "title": "Install Confluent Operator",
-        "text": "step2/text.md",
-        "verify": "step2/verify.sh"
+        "text": "step2.md",
       },
       {
         "title": "Deploy Kafka with KRaft",
-        "text": "step3/text.md",
-        "verify": "step3/verify.sh"
+        "text": "step3.md",
       },
       {
         "title": "Verify KRaft Cluster",
-        "text": "step4/text.md",
-        "verify": "step4/verify.sh"
+        "text": "step4.md",
       },
       {
         "title": "Create and Manage Topics",
-        "text": "step5/text.md",
-        "verify": "step5/verify.sh"
+        "text": "step5.md",
       },
       {
         "title": "Produce and Consume Messages",
-        "text": "step6/text.md",
-        "verify": "step6/verify.sh"
+        "text": "step6.md",
       },
       {
         "title": "Scale KRaft Cluster",
-        "text": "step7/text.md",
-        "verify": "step7/verify.sh"
+        "text": "step7.md",      
       }
     ],
     "finish": {
