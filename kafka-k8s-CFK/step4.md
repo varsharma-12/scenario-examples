@@ -6,7 +6,7 @@ Let's thoroughly verify that our KRaft cluster is healthy and operational.
 
 Verify all components are ready:
 ````bash
-kubectl get kafkacontroller,kafka -n confluent
+kubectl get kraftcontroller,kafka -n confluent
 ````{{exec}}
 
 Both resources should show `READY` status with correct replica count .
