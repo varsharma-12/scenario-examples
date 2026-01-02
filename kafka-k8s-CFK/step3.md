@@ -28,12 +28,6 @@ spec:
     application: docker.io/confluentinc/cp-server:7.9.0
     init: confluentinc/confluent-init-container:2.11.0
   dataVolumeCapacity: 10Gi
-  listeners:
-    controller:
-      enabled: true
-      port: 9073
-  metricReporter:
-    enabled: false
 EOF
 ````{{exec}}
 
@@ -80,12 +74,6 @@ spec:
     application: docker.io/confluentinc/cp-server:7.9.0
     init: confluentinc/confluent-init-container:2.11.0
   dataVolumeCapacity: 10Gi
-  metricReporter:
-    enabled: false
-  listeners:
-    internal:
-      enabled: true
-      port: 9092
   dependencies:
     kafkaController:
       clusterRef:
