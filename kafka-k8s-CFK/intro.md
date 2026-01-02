@@ -10,7 +10,7 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that **eliminates the depen
 ## What You'll Learn
 
 - Install and configure the Confluent for Kubernetes Operator
-- Deploy a production-ready Kafka cluster in KRaft mode
+- Deploy a  Kafka cluster in KRaft mode
 - Understand KRaft controller and broker roles
 - Create and manage Kafka topics
 - Produce and consume messages
