@@ -23,7 +23,7 @@ metadata:
   name: kraftcontroller
   namespace: confluent
 spec:
-  replicas: 3
+  replicas: 1
   image:
     application: docker.io/confluentinc/cp-server:7.9.0
     init: confluentinc/confluent-init-container:2.11.0
@@ -44,7 +44,7 @@ kubectl get pods -n confluent -w
 
 ## Monitor Controller Deployment
 
-Wait until all three controller pods show `Running` and `1/1` ready. This takes 2-3 minutes. Press `Ctrl+C` once ready.
+Wait until controller pod show `Running` and `1/1` ready. This takes 2-3 minutes. Press `Ctrl+C` once ready.
 
 ## Verify Controllers are Ready
 
@@ -69,7 +69,7 @@ metadata:
   name: kafka
   namespace: confluent
 spec:
-  replicas: 3
+  replicas: 1
   image:
     application: docker.io/confluentinc/cp-server:7.9.0
     init: confluentinc/confluent-init-container:2.11.0
@@ -95,7 +95,7 @@ Watch the broker pods being created:
 kubectl get pods -n confluent -l app=kafka -w
 ````{{exec}}
 
-Wait until all three broker pods show `Running` and `1/1` ready. This takes 3-5 minutes. Press `Ctrl+C` once ready.
+Wait until  broker pod show `Running` and `1/1` ready. This takes 3-5 minutes. Press `Ctrl+C` once ready.
 
 
 ## Verify Complete Deployment
@@ -142,8 +142,4 @@ kubectl describe kafka kafka -n confluent
 
 Look for the `Status` section showing the cluster is ready.
 
-✅ **Success!** You've deployed a production-ready Kafka cluster with:
-- 3 dedicated KRaft controllers for metadata management
-- 3 dedicated brokers for data handling
-- Persistent storage for durability
 
