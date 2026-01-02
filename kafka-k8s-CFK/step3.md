@@ -118,6 +118,7 @@ All should be in `Running` state with `1/1` ready.
 ## View Services
 
 Check the services created:
+
 ````bash
 kubectl get svc -n confluent
 ````{exec}}
