@@ -18,9 +18,9 @@ First, let's create the controller configuration:
 ````bash
 cat <<EOF > Kraft.yaml
 apiVersion: platform.confluent.io/v1beta1
-kind: KRaftController
+kind: kraftcontroller
 metadata:
-  name: KRaftController
+  name: kraftcontroller
   namespace: confluent
 spec:
   replicas: 3
@@ -77,7 +77,7 @@ spec:
   dependencies:
     kafkaController:
       clusterRef:
-        name: KRaftController
+        name: kraftcontroller
 EOF
 ````{{exec}}
 
