@@ -18,7 +18,7 @@ First, let's create the controller configuration:
 ````bash
 cat <<EOF > Kraft.yaml
 apiVersion: platform.confluent.io/v1beta1
-kind: kraftcontroller
+kind: KRaftController
 metadata:
   name: kraftcontroller
   namespace: confluent
