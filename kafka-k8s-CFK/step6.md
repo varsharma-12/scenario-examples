@@ -15,10 +15,10 @@ kubectl exec -n confluent kafka-0 -- \
 
 **Type messages and press Enter after each one:**
 `````````````````````````````````````````````````````````````````````````````````````
-Hello Kafka with KRaft!
-This is message number 2
+Hello Kafka with KRaft! \
+This is message number 2 \
 Testing message production
-``````````````````````````````````````````````````````````````````````````````````````
+
 
 Press `Ctrl+C` to stop producing.
 
