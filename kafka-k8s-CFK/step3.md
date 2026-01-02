@@ -75,7 +75,7 @@ spec:
     init: confluentinc/confluent-init-container:2.11.0
   dataVolumeCapacity: 10Gi
   dependencies:
-    kafkaController:
+    kRaftController:
       clusterRef:
         name: kraftcontroller
 EOF
@@ -130,6 +130,7 @@ Notice the separate services:
 ## View All Confluent Resources
 
 List all Confluent Platform resources:
+
 ````bash
 kubectl get confluent -n confluent
 ````{{exec}}
@@ -137,6 +138,7 @@ kubectl get confluent -n confluent
 ## Verify KRaft Cluster Metadata
 
 Check the cluster metadata from a broker:
+
 ````bash
 kubectl exec -n confluent kafka-0 -- \
   kafka-metadata-quorum --bootstrap-server kafka:9092 describe --status
@@ -147,6 +149,7 @@ This shows the controller quorum status and confirms KRaft mode is active.
 ## View Controller Logs (Optional)
 
 Check controller logs to see the quorum formation:
+
 ````bash
 kubectl logs -n confluent kraftcontroller-0 --tail=20
 ````{{exec}}
