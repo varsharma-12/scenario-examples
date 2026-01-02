@@ -56,7 +56,7 @@ This shows the metadata replication status across controller.
 
 Check the controller service endpoints:
 ````bash
-kubectl get endpoints kafkacontroller -n confluent
+kubectl get endpoints kraftcontroller -n confluent
 ````{{exec}}
 
 
@@ -83,18 +83,18 @@ Get detailed information about the Kafka broker cluster:
 kubectl describe kafka kafka -n confluent
 ````{{exec}}
 
-## Describe KafkaController Resource
+## Describe kraftcontroller Resource
 
 Get detailed information about the controller cluster:
 ````bash
-kubectl describe kafkacontroller kafkacontroller -n confluent
+kubectl describe kraftcontroller kraftcontroller -n confluent
 ````{{exec}}
 
 ## View Controller Logs
 
 Check recent controller logs for any issues:
 ````bash
-kubectl logs -n confluent kafkacontroller-0 --tail=30 | grep -i "error\|warn\|controller"
+kubectl logs -n confluent kraftcontroller-0 --tail=30 | grep -i "error\|warn\|controller"
 ````{{exec}}
 
 ## View Broker Logs
