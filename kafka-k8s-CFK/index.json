@@ -5,7 +5,7 @@
   "time": "25-35 minutes",
   "details": {
     "intro": {
-      "text": "intro.md",
+      "text": "intro.md"
     },
     "steps": [
       {
@@ -14,27 +14,27 @@
       },
       {
         "title": "Install Confluent Operator",
-        "text": "step2.md",
+        "text": "step2.md"
       },
       {
         "title": "Deploy Kafka with KRaft",
-        "text": "step3.md",
+        "text": "step3.md"
       },
       {
         "title": "Verify KRaft Cluster",
-        "text": "step4.md",
+        "text": "step4.md"
       },
       {
         "title": "Create and Manage Topics",
-        "text": "step5.md",
+        "text": "step5.md"
       },
       {
         "title": "Produce and Consume Messages",
-        "text": "step6.md",
+        "text": "step6.md"
       },
       {
         "title": "Scale KRaft Cluster",
-        "text": "step7.md",      
+        "text": "step7.md"    
       }
     ],
     "finish": {
