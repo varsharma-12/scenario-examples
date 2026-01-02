@@ -14,7 +14,6 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that **eliminates the depen
 - Understand KRaft controller and broker roles
 - Create and manage Kafka topics
 - Produce and consume messages
-- Scale your KRaft cluster
 
 ## Prerequisites
 
