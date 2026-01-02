@@ -56,7 +56,7 @@ kubectl get kraftcontroller -n confluent
 kubectl get pods -n confluent -l app=kraftcontroller
 ````{{exec}}
 
-All three controller pods should be running.
+Controller pods should be running.
 
 ## Create Kafka Broker Configuration
 
