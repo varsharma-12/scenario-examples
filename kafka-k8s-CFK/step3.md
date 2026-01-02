@@ -39,7 +39,7 @@ kubectl apply -f Kraft.yaml
 
 ## Watch the controller pods being created:
 ````bash
-kubectl get pods -n confluent -l app=kafkacontroller -w
+kubectl get pods -n confluent -w
 ````{{exec}}
 
 ## Monitor Controller Deployment
@@ -50,10 +50,10 @@ Wait until all three controller pods show `Running` and `1/1` ready. This takes 
 
 Check controller status:
 ````bash
-kubectl get kafkacontroller -n confluent
+kubectl get kraftcontroller -n confluent
 ````{{exec}}
 ````bash
-kubectl get pods -n confluent -l app=kafkacontroller
+kubectl get pods -n confluent -l app=kraftcontroller
 ````{{exec}}
 
 All three controller pods should be running.
@@ -147,7 +147,7 @@ This shows the controller quorum status and confirms KRaft mode is active.
 
 Check controller logs to see the quorum formation:
 ````bash
-kubectl logs -n confluent kafkacontroller-0 --tail=20
+kubectl logs -n confluent kraftcontroller-0 --tail=20
 ````{{exec}}
 
 
