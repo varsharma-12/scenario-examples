@@ -16,11 +16,11 @@ This separation provides better resource isolation and scalability for productio
 
 First, let's create the controller configuration:
 ````bash
-cat <<EOF > kafka-controller.yaml
+cat <<EOF > Kraft.yaml
 apiVersion: platform.confluent.io/v1beta1
-kind: KafkaController
+kind: KRaftController
 metadata:
-  name: kafkacontroller
+  name: KRaftController
   namespace: confluent
 spec:
   replicas: 3
@@ -36,6 +36,33 @@ spec:
     enabled: false
 EOF
 ````{{exec}}
+
+## Deploy KRaft Controllers
+
+````bash
+kubectl apply -f Kraft.yaml
+````{{exec}}
+
+## Watch the controller pods being created:
+````bash
+kubectl get pods -n confluent -l app=kafkacontroller -w
+````{{exec}}
+
+## Monitor Controller Deployment
+
+Wait until all three controller pods show `Running` and `1/1` ready. This takes 2-3 minutes. Press `Ctrl+C` once ready.
+
+## Verify Controllers are Ready
+
+Check controller status:
+````bash
+kubectl get kafkacontroller -n confluent
+````{{exec}}
+````bash
+kubectl get pods -n confluent -l app=kafkacontroller
+````{{exec}}
+
+All three controller pods should be running.
 
 ## Create Kafka Broker Configuration
 
@@ -62,59 +89,12 @@ spec:
   dependencies:
     kafkaController:
       clusterRef:
-        name: kafkacontroller
+        name: KRaftController
 EOF
 ````{{exec}}
 
-## Review the Configurations
-
-View the controller configuration:
-````bash
-cat kafka-controller.yaml
-````{exec}}
-
-View the broker configuration:
-````bash
-cat kafka-broker.yaml
-````{{exec}}
-
-**Key architecture points:**
-- **3 Controllers** - Dedicated metadata management
-- **3 Brokers** - Dedicated data handling
-- **No ZooKeeper** - KRaft consensus protocol
-- **Persistent storage** - 10Gi per node
-
-## Deploy KRaft Controllers
-
-First, deploy the controllers:
-````bash
-kubectl apply -f kafka-controller.yaml
-````{{exec}}
-
-## Monitor Controller Deployment
-
-Watch the controller pods being created:
-````bash
-kubectl get pods -n confluent -l app=kafkacontroller -w
-````{{exec}}
-
-Wait until all three controller pods show `Running` and `1/1` ready. This takes 2-3 minutes. Press `Ctrl+C` once ready.
-
-## Verify Controllers are Ready
-
-Check controller status:
-````bash
-kubectl get kafkacontroller -n confluent
-````{{exec}}
-````bash
-kubectl get pods -n confluent -l app=kafkacontroller
-````{{exec}}
-
-All three controller pods should be running.
-
 ## Deploy Kafka Brokers
 
-Now deploy the brokers:
 ````bash
 kubectl apply -f kafka-broker.yaml
 ````{{exec}}
@@ -128,18 +108,12 @@ kubectl get pods -n confluent -l app=kafka -w
 
 Wait until all three broker pods show `Running` and `1/1` ready. This takes 3-5 minutes. Press `Ctrl+C` once ready.
 
-**Why it takes time:**
-- Controller quorum formation
-- Cluster ID generation
-- Metadata synchronization
-- Persistent volumes binding
-- Broker registration with controllers
 
 ## Verify Complete Deployment
 
 Check all Kafka resources:
 ````bash
-kubectl get kafkacontroller,kafka -n confluent
+kubectl get all -n confluent
 ````{{exec}}
 
 View all pods:
@@ -148,7 +122,7 @@ kubectl get pods -n confluent
 ````{{exec}}
 
 You should see:
-- 3 `kafkacontroller-*` pods
+- 3 `KRaftController-*` pods
 - 3 `kafka-*` pods
 
 All should be in `Running` state with `1/1` ready.
@@ -163,7 +137,6 @@ kubectl get svc -n confluent
 Notice the separate services:
 - `kafkacontroller` - Controller endpoints
 - `kafka` - Broker endpoints
-- **No ZooKeeper service** - KRaft eliminates this dependency!
 
 ## View All Confluent Resources
 
@@ -189,12 +162,6 @@ Check controller logs to see the quorum formation:
 kubectl logs -n confluent kafkacontroller-0 --tail=20
 ````{{exec}}
 
-## View Broker Logs (Optional)
-
-Check broker logs to see the connection to controllers:
-````bash
-kubectl logs -n confluent kafka-0 --tail=20
-````{{exec}}
 
 ## Verify Cluster Topology
 
@@ -208,8 +175,5 @@ Look for the `Status` section showing the cluster is ready.
 ✅ **Success!** You've deployed a production-ready Kafka cluster with:
 - 3 dedicated KRaft controllers for metadata management
 - 3 dedicated brokers for data handling
-- No ZooKeeper dependency
 - Persistent storage for durability
 
-This architecture provides better resource isolation and is recommended for production deployments.
-```
