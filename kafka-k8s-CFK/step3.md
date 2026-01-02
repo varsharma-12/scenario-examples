@@ -90,6 +90,7 @@ kubectl apply -f kafka-broker.yaml
 ## Monitor Broker Deployment
 
 Watch the broker pods being created:
+
 ````bash
 kubectl get pods -n confluent -l app=kafka -w
 ````{{exec}}
@@ -100,32 +101,16 @@ Wait until all three broker pods show `Running` and `1/1` ready. This takes 3-5 
 ## Verify Complete Deployment
 
 Check all Kafka resources:
+
 ````bash
 kubectl get all -n confluent
 ````{{exec}}
 
 View all pods:
+
 ````bash
 kubectl get pods -n confluent
 ````{{exec}}
-
-You should see:
-- 3 `KRaftController-*` pods
-- 3 `kafka-*` pods
-
-All should be in `Running` state with `1/1` ready.
-
-## View Services
-
-Check the services created:
-
-````bash
-kubectl get svc -n confluent
-````{exec}}
-
-Notice the separate services:
-- `kafkacontroller` - Controller endpoints
-- `kafka` - Broker endpoints
 
 ## View All Confluent Resources
 
@@ -146,18 +131,11 @@ kubectl exec -n confluent kafka-0 -- \
 
 This shows the controller quorum status and confirms KRaft mode is active.
 
-## View Controller Logs (Optional)
-
-Check controller logs to see the quorum formation:
-
-````bash
-kubectl logs -n confluent kraftcontroller-0 --tail=20
-````{{exec}}
-
 
 ## Verify Cluster Topology
 
 Get detailed information about the cluster:
+
 ````bash
 kubectl describe kafka kafka -n confluent
 ````{{exec}}
