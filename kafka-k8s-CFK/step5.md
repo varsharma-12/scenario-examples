@@ -11,7 +11,7 @@ kubectl exec -n confluent kafka-0 -- \
   --create \
   --topic demo-topic \
   --partitions 3 \
-  --replication-factor 3
+  --replication-factor 1
 ````{{exec}}
 
 This creates a topic with:
@@ -50,12 +50,12 @@ kubectl exec -n confluent kafka-0 -- \
   --create \
   --topic orders-topic \
   --partitions 6 \
-  --replication-factor 3 \
+  --replication-factor 1 \
   --config retention.ms=86400000 \
   --config segment.bytes=104857600
 ````{{exec}}
 
-Configuration explained:
+Configuration :
 - **retention.ms=86400000**: Keep messages for 24 hours
 - **segment.bytes=104857600**: 100MB segment size
 
@@ -68,7 +68,7 @@ kubectl exec -n confluent kafka-0 -- \
   --create \
   --topic user-state \
   --partitions 3 \
-  --replication-factor 3 \
+  --replication-factor 1 \
   --config cleanup.policy=compact \
   --config min.compaction.lag.ms=60000
 ````{{exec}}
@@ -167,7 +167,7 @@ metadata:
   name: events-topic
   namespace: confluent
 spec:
-  replicas: 3
+  replicas: 1
   partitionCount: 6
   configs:
     retention.ms: "259200000"
