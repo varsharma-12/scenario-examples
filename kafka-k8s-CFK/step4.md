@@ -67,15 +67,6 @@ Check the broker service endpoints:
 kubectl get endpoints kafka -n confluent
 ````{{exec}}
 
-## Check Pod Resources
-
-View resource allocation for the pods:
-````bash
-kubectl top pods -n confluent
-````{{exec}}
-
-This shows CPU and memory usage for each pod.
-
 ## Describe Kafka Resource
 
 Get detailed information about the Kafka broker cluster:
