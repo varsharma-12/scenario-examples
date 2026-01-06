@@ -1,7 +1,5 @@
 ## Step 5: Create and Manage Topics
 
-# Step 5: Create and Manage Topics
-
 Now let's create Kafka topics and learn how to manage them in a KRaft cluster.
 
 ## Create a Simple Topic
