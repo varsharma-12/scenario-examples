@@ -25,6 +25,6 @@ KRaft (Kafka Raft) is Kafka's new consensus protocol that **eliminates the depen
 
 You'll deploy:
 - **Confluent Operator**: Manages Kafka infrastructure
-- **Kafka Controllers**: Handle metadata consensus 
+- **Kraft Controllers**: Handle metadata consensus 
 - **Kafka Brokers**: Message streaming platform 
 
