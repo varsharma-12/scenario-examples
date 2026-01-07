@@ -17,9 +17,6 @@ seq 5 | kafka-console-producer --bootstrap-server kafka.confluent.svc.cluster.lo
 ## Consume Messages from Beginning
 
 Read all messages from the topic:
-````bash
-kubectl -n confluent exec -it kafka-0 -- bash
-````{{exec}}
 
 ````bash
 kafka-console-consumer --bootstrap-server kafka:9071 \
