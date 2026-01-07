@@ -2,15 +2,13 @@
 
 Now let's deploy Kafka using KRaft mode with dedicated controller and broker nodes - no ZooKeeper required!
 
-This tutorial refers the examples from https://github.com/confluentinc/confluent-kubernetes-examples/tree/master/quickstart-deploy/kraft-quickstart
-
 ## Understanding KRaft Architecture
 
 In this deployment, we'll use separate roles:
 - **Controllers**: Dedicated nodes for cluster metadata and leader election
 - **Brokers**: Dedicated nodes for handling client connections and data storage
 
-This separation provides better resource isolation and scalability for production environments.
+This separation provides better resource isolation and scalability .
 
 ## Create KRaft Controller Configuration
 
