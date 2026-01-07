@@ -125,8 +125,11 @@ kubectl get confluent -n confluent
 Check the cluster metadata from a broker:
 
 ````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-metadata-quorum --bootstrap-server kafka:9092 describe --status
+kubectl exec -n confluent kafka-0 -it -- bash
+````{{exec}}
+
+````bash
+kafka-metadata-quorum --bootstrap-server kafka:9092 describe --status
 ````{{exec}}
 
 This shows the controller quorum status and confirms KRaft mode is active.
