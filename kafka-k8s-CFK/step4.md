@@ -20,32 +20,6 @@ kubectl get pods -n confluent -o wide
 
 All should be `Running` with `1/1` ready status.
 
-## View Broker ID
-
-List all broker ID in the cluster:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-broker-api-versions --bootstrap-server kafka:9092 | grep id
-````{{exec}}
-
-## Check Cluster Metadata
-
-View cluster metadata to confirm KRaft mode:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-metadata-quorum --bootstrap-server kafka:9092 describe --replication
-````{{exec}}
-
-This shows the metadata replication status across controller.
-
-## Verify Controller Endpoints
-
-Check the controller service endpoints:
-````bash
-kubectl get endpoints kraftcontroller -n confluent
-````{{exec}}
-
-
 ## Describe Kafka Resource
 
 Get detailed information about the Kafka broker cluster:
@@ -64,14 +38,14 @@ kubectl describe kraftcontroller kraftcontroller -n confluent
 
 Check recent controller logs for any issues:
 ````bash
-kubectl logs -n confluent kraftcontroller-0 --tail=30 | grep -i "error\|warn\|controller"
+kubectl logs -n confluent kraftcontroller-0 --tail=30 
 ````{{exec}}
 
 ## View Broker Logs
 
 Check recent broker logs:
 ````bash
-kubectl logs -n confluent kafka-0 --tail=30 | grep -i "error\|warn\|started"
+kubectl logs -n confluent kafka-0 --tail=30
 ````{{exec}}
 
 ## Check Persistent Volumes
