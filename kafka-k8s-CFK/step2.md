@@ -57,7 +57,7 @@ kubectl logs -l app=confluent-operator -n confluent --tail=50
 Check that the Kafka Custom Resource Definition is installed:
 
 ````bash
-kubectl get crd kafkas.platform.confluent.io
+kubectl api-resources --api-group=platform.confluent.io
 ````{{exec}}
 
 Great! The operator is ready to deploy Kafka in KRaft mode.
