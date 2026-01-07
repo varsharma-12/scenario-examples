@@ -104,19 +104,12 @@ Check all Kafka resources:
 kubectl get all -n confluent
 ````{{exec}}
 
-View all pods:
+View all pods deployed on underlying nodes.
 
 ````bash
-kubectl get pods -n confluent
+kubectl get pods  -o wide -n confluent
 ````{{exec}}
 
-## View All Confluent Resources
-
-List all Confluent Platform resources:
-
-````bash
-kubectl get confluent -n confluent
-````{{exec}}
 
 ## Verify KRaft Cluster Metadata
 
