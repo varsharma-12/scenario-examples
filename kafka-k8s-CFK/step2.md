@@ -24,10 +24,7 @@ Install the Confluent for Kubernetes Operator using Helm:
 helm upgrade --install confluent-operator \
   confluentinc/confluent-for-kubernetes \
   --namespace confluent \
-  --set kRaftEnabled=true
 ````{{exec}}
-
-**Note:** The `--set kRaftEnabled=true` flag ensures KRaft support is enabled.
 
 This will take 1-2 minutes to complete.
 
