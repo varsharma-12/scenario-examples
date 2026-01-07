@@ -16,7 +16,7 @@ kubectl exec -n confluent kafka-0 -- \
 
 This creates a topic with:
 - **3 partitions**: For parallel processing
-- **Replication factor 3**: Each partition replicated across all brokers
+- **Replication factor 3**: Each partition replicated across broker
 
 ## List All Topics
 
@@ -174,14 +174,6 @@ kubectl exec -n confluent kafka-0 -- \
   --topic events-topic
 ````{{exec}}
 
-Confluent for Kubernetes (CFK) provides the custom resource definitions (CRDs) that were created using Kubernetes API
-To vlaidate the settings that are supported in Confluent CRDs describe a specific CRD:
-
-kubectl explain <CRD-type>.<fieldName>[.<fieldName>]
-
-````bash
-kubectl explain KafkaTopic.spec.partitionCount -n confluent
-````{{exec}}
 
 You've learned to:
 - Create topics with various configurations
