@@ -1,6 +1,6 @@
-# Step 4: Verify KRaft Cluster
+# Step 4: Verify Cluster
 
-Let's thoroughly verify that our KRaft cluster is healthy and operational.
+Here are some commands to debug the deployed clsuter.
 
 ## Check Cluster Status
 
@@ -19,20 +19,6 @@ kubectl get pods -n confluent -o wide
 ````{{exec}}
 
 All should be `Running` with `1/1` ready status.
-
-## Check Controller Quorum Status
-
-Verify the controller quorum is formed and healthy:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-metadata-quorum --bootstrap-server kafka:9092 describe --status
-````{{exec}}
-
-This output shows:
-- **ClusterId**: Unique KRaft cluster identifier
-- **LeaderId**: Current controller leader
-- **Voters**: List of controller nodes in the quorum
-- **Observers**: Broker nodes observing the quorum
 
 ## View Broker ID
 
@@ -59,13 +45,6 @@ Check the controller service endpoints:
 kubectl get endpoints kraftcontroller -n confluent
 ````{{exec}}
 
-
-## Verify Broker Endpoints
-
-Check the broker service endpoints:
-````bash
-kubectl get endpoints kafka -n confluent
-````{{exec}}
 
 ## Describe Kafka Resource
 
@@ -95,10 +74,9 @@ Check recent broker logs:
 kubectl logs -n confluent kafka-0 --tail=30 | grep -i "error\|warn\|started"
 ````{{exec}}
 
-
 ## Check Persistent Volumes
 
 Verify persistent volumes are bound:
 ````bash
-kubectl get pvc -n confluent
+kubectl get pv,pvc -n confluent
 ````{{exec}}
