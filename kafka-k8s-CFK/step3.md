@@ -125,6 +125,9 @@ kafka-metadata-quorum --bootstrap-server kafka:9092 describe --status
 
 This shows the controller quorum status and confirms KRaft mode is active.
 
+````bash
+exit
+````{{exec}}
 
 ## Verify Cluster Topology
 
