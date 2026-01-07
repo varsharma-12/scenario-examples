@@ -23,7 +23,7 @@ Install the Confluent for Kubernetes Operator using Helm:
 ````bash
 helm upgrade --install confluent-operator \
   confluentinc/confluent-for-kubernetes \
-  --namespace confluent \
+  --namespace confluent
 ````{{exec}}
 
 This will take 1-2 minutes to complete.
