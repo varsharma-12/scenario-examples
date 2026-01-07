@@ -2,7 +2,7 @@
 
 Welcome! In this hands-on scenario, you'll learn how to deploy Apache Kafka using **KRaft mode** (Kafka Raft) on Kubernetes with the Confluent for Kubernetes (CFK) Operator.
 
-This tutorial provides an handson experience to deploy kafka on kubernetes using enterprise grade operator i.e CFK.
+This tutorial provides a handson experience to deploy kafka on kubernetes using enterprise grade operator i.e CFK.
 The operator is a Kubernetes Deployment whose lifecycle is managed by Helm.
 Kafka and Kraft will have their custom resource definitions (CRDs) deployed as kubernetes Statfulsets .
 CFK actively monitors the custom resources to ensure their state matches the desired state.
