@@ -1,111 +1,33 @@
 ## Step 6: Produce and Consume Messages
 
-# Step 6: Produce and Consume Messages
-
-Let's test our Kafka cluster by producing and consuming messages.
+Let's test Kafka cluster by producing and consuming messages.
 
 ## Produce Messages to demo-topic
 
 Start producing messages interactively:
 ````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-console-producer --bootstrap-server kafka:9092 \
+kubectl -n confluent exec -it kafka-0 -- bash
+````{{exec}}
+
+````bash
+seq 5 | kafka-console-producer --bootstrap-server kafka.confluent.svc.cluster.local:9071 \
   --topic demo-topic
 ````{{exec}}
 
-**Type messages and press Enter after each one:**
-`````````````````````````````````````````````````````````````````````````````````````
-Hello Kafka with KRaft! \
-This is message number 2 \
-Testing message production
-
-
-Press `Ctrl+C` to stop producing.
-
-## Produce Messages with Keys
-
-Produce messages with keys for proper partitioning:
-````bash
-kubectl exec -n confluent kafka-0 -- bash -c '
-echo "user1:Login successful" | kafka-console-producer \
-  --bootstrap-server kafka:9092 \
-  --topic demo-topic \
-  --property "parse.key=true" \
-  --property "key.separator=:"
-'
-````{{exec}}
-````bash
-kubectl exec -n confluent kafka-0 -- bash -c '
-echo "user2:Order placed" | kafka-console-producer \
-  --bootstrap-server kafka:9092 \
-  --topic demo-topic \
-  --property "parse.key=true" \
-  --property "key.separator=:"
-'
-````{{exec}}
-````bash
-kubectl exec -n confluent kafka-0 -- bash -c '
-echo "user1:Logout successful" | kafka-console-producer \
-  --bootstrap-server kafka:9092 \
-  --topic demo-topic \
-  --property "parse.key=true" \
-  --property "key.separator=:"
-'
-````{{exec}}
 ## Consume Messages from Beginning
 
 Read all messages from the topic:
 ````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-console-consumer --bootstrap-server kafka:9092 \
+kubectl -n confluent exec -it kafka-0 -- bash
+````{{exec}}
+
+````bash
+kafka-console-consumer --bootstrap-server kafka:9071 \
   --topic demo-topic \
   --from-beginning \
   --timeout-ms 10000
 ````{{exec}}
 This will display all messages and exit after 10 seconds.
-
-## Consume Messages with Keys and Timestamps
-
-View messages with metadata:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-console-consumer --bootstrap-server kafka:9092 \
-  --topic demo-topic \
-  --from-beginning \
-  --property print.key=true \
-  --property print.timestamp=true \
-  --property key.separator=" | " \
-  --timeout-ms 10000
-````{{exec}}
-
-Output format: `timestamp | key | value`
-
-## Produce Batch Messages
-
-Send multiple messages at once:
-````bash
-kubectl exec -n c
-onfluent kafka-0 -- bash -c '
-echo -e "order1:Product A ordered\norder2:Product B ordered\norder3:Product C ordered" | \
-kafka-console-producer \
-  --bootstrap-server kafka:9092 \
-  --topic orders-topic \
-  --property "parse.key=true" \
-  --property "key.separator=:"
-'
-````{{exec}}
-
-## Consume from Specific Partition
-
-Read from partition 0 only:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-console-consumer --bootstrap-server kafka:9092 \
-  --topic demo-topic \
-  --partition 0 \
-  --from-beginning \
-  --timeout-ms 10000
-````{{exec}}
 
 ## Create Consumer Group
 
