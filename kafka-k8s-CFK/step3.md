@@ -145,4 +145,4 @@ kubectl describe kafka kafka -n confluent
 
 Look for the `Status` section showing the cluster is ready.
 
-
+A Single node kraft based kafka cluster is successfully deployed on kubernetes .
