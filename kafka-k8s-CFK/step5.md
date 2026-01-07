@@ -59,22 +59,6 @@ Configuration :
 - **retention.ms=86400000**: Keep messages for 24 hours
 - **segment.bytes=104857600**: 100MB segment size
 
-## Create a Compacted Topic
-
-Create a log-compacted topic for storing latest state:
-````bash
-kubectl exec -n confluent kafka-0 -- \
-  kafka-topics --bootstrap-server kafka:9092 \
-  --create \
-  --topic user-state \
-  --partitions 3 \
-  --replication-factor 1 \
-  --config cleanup.policy=compact \
-  --config min.compaction.lag.ms=60000
-````{{exec}}
-
-Compacted topics retain only the latest value per key.
-
 ## List Topics with Details
 
 View all topics with partition counts:
@@ -86,7 +70,6 @@ kubectl exec -n confluent kafka-0 -- \
 You should see:
 - demo-topic
 - orders-topic
-- user-state
 
 ## Describe All Topics
 
@@ -132,8 +115,6 @@ kubectl exec -n confluent kafka-0 -- \
   --partitions 9
 ````{{exec}}
 
-**Note**: You can only increase partitions, not decrease them.
-
 ## Verify Partition Increase
 
 Check the updated partition count:
@@ -146,7 +127,6 @@ kubectl exec -n confluent kafka-0 -- \
 
 ## Check Topic Distribution Across Brokers
 
-See how partitions are distributed:
 ````bash
 kubectl exec -n confluent kafka-0 -- \
   kafka-topics --bootstrap-server kafka:9092 \
@@ -154,11 +134,10 @@ kubectl exec -n confluent kafka-0 -- \
   --topic demo-topic | grep "Leader"
 ````{{exec}}
 
-Each broker should be leading approximately equal numbers of partitions.
+## Create Topic Using Declarative YAML
 
-## Create Topic Using Declarative YAML (Alternative Method)
+Confluent for Kubernetes (CFK) allows to declaratively create and manage Kafka topics as KafkaTopic custom resources (CRs) in Kubernetes. Each KafkaTopic CR is mapped to a topic and kept in sync with the corresponding Kafka topic.
 
-You can also create topics using Kubernetes custom resources:
 ````bash
 cat <<EOF > kafka-topic.yaml
 apiVersion: platform.confluent.io/v1beta1
@@ -195,22 +174,16 @@ kubectl exec -n confluent kafka-0 -- \
   --topic events-topic
 ````{{exec}}
 
-## View All Topics Summary
+Confluent for Kubernetes (CFK) provides the custom resource definitions (CRDs) that were created using Kubernetes API
+To vlaidate the settings that are supported in Confluent CRDs describe a specific CRD:
 
-Get a summary of all topics:
+kubectl explain <CRD-type>.<fieldName>[.<fieldName>]
+
 ````bash
-echo "=== Topics Summary ==="
-kubectl exec -n confluent kafka-0 -- \
-  kafka-topics --bootstrap-server kafka:9092 --list | \
-  while read topic; do
-    echo "Topic: $topic"
-    kubectl exec -n confluent kafka-0 -- \
-      kafka-topics --bootstrap-server kafka:9092 \
-      --describe --topic $topic | grep "PartitionCount"
-  done
+kubectl explain KafkaTopic.spec.partitionCount -n confluent
 ````{{exec}}
 
-✅ **Topic Management Complete!** You've learned to:
+You've learned to:
 - Create topics with various configurations
 - Modify topic settings
 - Scale partitions
