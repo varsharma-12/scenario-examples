@@ -9,7 +9,7 @@ You've successfully completed the **Deploy Kafka with KRaft on Kubernetes using 
 Throughout this tutorial, you've learned how to:
 
 ### ✅ Cluster Deployment
-- Deployed a production-ready Kafka cluster using **KRaft mode** (no ZooKeeper!)
+- Deployed a kraft based Kafka cluster 
 - Set up separate **KRaft Controllers** for metadata management
 - Configured **Kafka Brokers** for data handling
 - Used **Confluent for Kubernetes (CFK)** operator for orchestration
@@ -27,10 +27,8 @@ Throughout this tutorial, you've learned how to:
 - Used both imperative and declarative approaches
 
 ### ✅ Message Operations
-- Produced messages with and without keys
-- Consumed messages from different positions
-- Worked with consumer groups and offset management
-- Tested message throughput and performance
+- Produced messages 
+- Consumed messages 
 
 ## Resources
 
