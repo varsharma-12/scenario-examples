@@ -1,0 +1,59 @@
+{
+  "title": "Java 26 GC Performance: Kafka Streams Demo",
+  "description": "Hands-on demonstration comparing GC performance between Java 21 and Java 26 using a real Kafka Streams application",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "background.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Understanding the Challenge",
+        "text": "step1.md"
+      },
+      {
+        "title": "Build the Application",
+        "text": "step2.md"
+      },
+      {
+        "title": "Deploy Kafka Infrastructure",
+        "text": "step3.md"
+      },
+      {
+        "title": "Deploy Both JDK Versions",
+        "text": "step4.md"
+      },
+      {
+        "title": "Generate Realistic Load",
+        "text": "step5.md"
+      },
+      {
+        "title": "Monitor Performance Difference",
+        "text": "step6.md"
+      },
+      {
+        "title": "Analyze Detailed Metrics",
+        "text": "step7.md"
+      },
+      {
+        "title": "Stress Test and Cost Analysis",
+        "text": "step8.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "kafka-streams-demo.tar.gz",
+          "target": "/root"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}
