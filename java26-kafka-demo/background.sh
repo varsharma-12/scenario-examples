@@ -28,9 +28,27 @@ touch /tmp/finished_setup
 
 
 # Extract the demo application if the tar.gz is present
-if [ -f /root/kafka-streams-demo.tar.gz ]; then
-    echo "Extracting demo application..."
-    tar -xzf /root/kafka-streams-demo.tar.gz -C /root/demo
+#if [ -f /root/kafka-streams-demo.tar.gz ]; then
+ #   echo "Extracting demo application..."
+  #  tar -xzf /root/kafka-streams-demo.tar.gz -C /root/demo
+#fi
+
+
+#  Wait for the asset to download
+while [ ! -f /root/kafka-streams-demo.tar.gz ]; do
+  sleep 1
+done
+
+#  Extract
+tar -xzf /root/kafka-streams-demo.tar.gz -C /root/demo/kafka-streams-demo/
+
+# 4. Path-Fix: Ensure pom.xml is in the root of the demo folder
+POM_PATH=$(find /root/demo/kafka-streams-demo -name pom.xml | head -n 1)
+if [ -n "$POM_PATH" ]; then
+    ACTUAL_DIR=$(dirname "$POM_PATH")
+    if [ "$ACTUAL_DIR" != "/root/demo/kafka-streams-demo" ]; then
+        mv "$ACTUAL_DIR"/* /root/demo/kafka-streams-demo/
+    fi
 fi
 
 # Pre-build Maven dependencies to save time
