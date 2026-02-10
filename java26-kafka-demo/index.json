@@ -48,7 +48,7 @@
       "host01": [
         {
           "file": "kafka-streams-demo.tar.gz",
-          "target": "/root"
+          "target": "/root/"
         }
       ]
     }
