@@ -63,6 +63,51 @@ kubectl get nodes
 
 You should see 2 nodes in "Ready" status.
 
+### Download and Extract Demo Files
+
+```bash
+mkdir -p /root/demo/kafka-streams-demo && \
+wget [https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz](https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz) -O /root/kafka-streams-demo.tar.gz && \
+tar -xzf /root/kafka-streams-demo.tar.gz -C /root/demo/kafka-streams-demo/
+```{{exec}}
+
+### Move to Workspace and Flatten Structure
+Sometimes the tarball contains a nested folder. This command moves you into the folder and ensures the `pom.xml` is in the right place.
+
+```bash
+cd /root/demo/kafka-streams-demo/ && \
+POM_PATH=$(find . -name pom.xml | head -n 1) && \
+ACTUAL_DIR=$(dirname "$POM_PATH") && \
+[ "$ACTUAL_DIR" != "." ] && mv "$ACTUAL_DIR"/* . || echo "Structure already flat"
+```{{exec}}
+
+### 3. Verify the Files
+Confirm that `pom.xml` and `src` are visible.
+
+```bash
+ls -la
+```{{exec}}
+
+
+### 3. Build the Java Application
+Run Maven to compile the code and create the executable JAR. We use `-DskipTests` to ensure the environment is ready quickly.
+
+```bash
+mvn clean package -DskipTests
+```{{exec}}
+
+### 4. Check Build Artifacts
+Verify that the `target` directory now contains your compiled JAR file.
+
+```bash
+ls -l target/
+```{{exec}}
+
+---
+
+### Troubleshooting
+If the first `ls` command showed an empty directory, the background process is still copying files. Please wait 10 seconds and try again.
+
 Now verify the demo files are extracted:
 
 ```bash
