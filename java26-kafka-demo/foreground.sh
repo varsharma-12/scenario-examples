@@ -12,6 +12,6 @@ while [ ! -f /tmp/finished_setup ]; do
 done
 
 # 4. Success message and move to the directory
-echo -e "\n\n✅ Environment Ready!"
+echo -e "\n\n Environment Ready!"
 cd /root/demo/kafka-streams-demo/
 ls -la
