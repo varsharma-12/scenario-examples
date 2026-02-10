@@ -20,8 +20,12 @@ echo "Installing Python dependencies..."
 pip3 install kafka-python --quiet
 
 # Create necessary directories
-mkdir -p /root/demo
-cd /root/demo
+
+mkdir -p /root/demo/kafka-streams-demo/
+
+cp -r /root/java26-kafka-demo/* /root/demo/kafka-streams-demo/
+touch /tmp/finished_setup
+
 
 # Extract the demo application if the tar.gz is present
 if [ -f /root/kafka-streams-demo.tar.gz ]; then
