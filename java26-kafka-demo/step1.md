@@ -66,8 +66,14 @@ You should see 2 nodes in "Ready" status.
 ### Download and Extract Demo Files
 
 ```bash
-mkdir -p /root/demo/kafka-streams-demo && \
-wget [https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz](https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz) -O /root/kafka-streams-demo.tar.gz && \
+mkdir -p /root/demo/kafka-streams-demo
+```{{exec}}
+
+```bash
+wget [https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz](https://raw.githubusercontent.com/varsharma-12/scenario-examples/main/java26-kafka-demo/kafka-streams-demo.tar.gz) -O /root/kafka-streams-demo.tar.gz
+```{{exec}}
+
+```bash
 tar -xzf /root/kafka-streams-demo.tar.gz -C /root/demo/kafka-streams-demo/
 ```{{exec}}
 
