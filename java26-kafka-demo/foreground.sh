@@ -1,23 +1,17 @@
-#!/bin/bash
+# 1. Clear the screen to look professional
+clear
 
-echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║   Java 26 GC Performance Demo - Environment Setup             ║"
-echo "╚════════════════════════════════════════════════════════════════╝"
-echo ""
-echo "Setting up your demo environment..."
-echo "⏳ This will take about 30-60 seconds"
-echo ""
+# 2. Show a loading message
+echo " Initializing Java 26 GC Performance Environment..."
+echo "Please wait while we prepare your files and Kubernetes cluster."
 
-# Wait for background setup to complete
-while [ ! -f /tmp/setup-complete ]; do
-    sleep 2
+# 3. Wait for the 'finished_setup' signal from background.sh
+while [ ! -f /tmp/finished_setup ]; do
+  echo -n "."
+  sleep 2
 done
 
-echo "✅ Kubernetes cluster ready"
-echo "✅ Maven installed"
-echo "✅ Python dependencies installed"
-echo "✅ Demo files extracted"
-echo ""
-echo "═══════════════════════════════════════════════════════════════"
-echo "Environment ready! Click 'Start' to begin the tutorial."
-echo "═══════════════════════════════════════════════════════════════"
+# 4. Success message and move to the directory
+echo -e "\n\n✅ Environment Ready!"
+cd /root/demo/kafka-streams-demo/
+ls -la
