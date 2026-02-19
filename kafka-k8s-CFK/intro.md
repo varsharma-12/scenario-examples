@@ -11,8 +11,11 @@ CFK uses a declarative Kubernetes-native [API approach](https://docs.confluent.i
 
 ## What is KRaft?
 
-KRaft (Kafka Raft) is Kafka's new consensus protocol that **eliminates the dependency on ZooKeeper**. It simplifies operations, improves performance, and is the future of Kafka architecture.
+KRaft (Kafka Raft) is Kafka's new consensus protocol that **eliminates the dependency on ZooKeeper**. It greatly simplifies Kafka’s architecture by consolidating responsibility for metadata into Kafka itself.
 
+The following image provides a simple illustration of Kafka running with KRaft managing metadata for the cluster. Each KRaft controller is a node in a Raft quorum, and each node is a broker that can handle client requests.
+
+<img width="537" height="687" alt="image" src="https://github.com/user-attachments/assets/9736ac5a-0411-4326-aa73-879a360977ac" />
 
 ## What You'll Learn
 
